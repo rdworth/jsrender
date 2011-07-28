@@ -5,6 +5,7 @@
  */
 
 (function( $, undefined ) {
+
 var htmlExpr = /^[^<]*(<[\w\W]+>)[^>]*$|\{\{\! /,
 	viewKey = 0, 
 	stack = [], 
@@ -68,7 +69,7 @@ function try$( selector ) {
 	// If selector is valid, return jQuery object, otherwise return (invalid) selector string
 	try {
 		return $( selector );
-	} catch( e) {}
+	} catch( e ) {}
 	return selector;
 }
 
@@ -336,4 +337,5 @@ function outerHtml( elem ) {
 	div.appendChild( elem.cloneNode( true ));
 	return div.innerHTML;
 }
-})( jQuery );
+
+}( jQuery ));
