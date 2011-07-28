@@ -94,3 +94,19 @@ test("two properties", function() {
 		"<li><b>UHF</b> (1989)</li>"
 	);
 });
+
+test("jagged data", function() {
+
+	equal($.render("${foo}",
+			{}
+		),
+		""
+	);
+
+	equal($.render("before${foo}after",
+			{}
+		),
+		"beforeafter"
+	);
+
+});
