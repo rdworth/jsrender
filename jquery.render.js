@@ -27,14 +27,14 @@ function View( context, parentView, tmplFn, data, path ) { //, index ) {
 	// Prototype is $.tmplSettings.view, which provides both methods and fields.
 
 	var content,
-		self = this,
-		parentContext;
+		parentContext,
+		self = this;
 
 	self.parent = parentView;
 	parentView = parentView || {};
 	parentContext = parentView.ctx;
 
-	$.extend( self, {
+	$.extend(self, {
 		path: path || "",
 		// inherit context from parentView, merged with new context.
 		data: data || parentView.data || {},
@@ -66,10 +66,12 @@ $.fn.extend({
 });
 
 function try$( selector ) {
-	// If selector is valid, return jQuery object, otherwise return (invalid) selector string
+	// If selector is valid, return jQuery object,
+	// otherwise return (invalid) selector string
 	try {
 		return $( selector );
 	} catch( e ) {}
+
 	return selector;
 }
 
@@ -77,8 +79,13 @@ $.extend({
 	// Return string obtained by rendering template against data.
 	render: function( tmpl, data, context, parentView, topLevel ) {
 		var ret = renderViews( tmpl, data, context, parentView, topLevel );
-		ret = ( !topLevel && parentView && tmpl) ? ret : buildStringArray( parentView, ret ).join("");
+
+		ret = ( !topLevel && parentView && tmpl ) ?
+			ret
+			: buildStringArray( parentView, ret ).join( "" );
+
 		viewKey = 0;
+
 		return ret;
 	},
 
@@ -224,7 +231,7 @@ function renderViews( tmpl, data, context, parentView, path ) {
 	var arrayView, ret, wrapped;
 
 	if ( tmpl ) {
-		tmpl  = $.template( tmpl );
+		tmpl = $.template( tmpl );
 		if ( !$.isFunction( tmpl ) ) {
 			tmpl = $.template[tmpl] || $.template( null, tmpl );
 		}
@@ -325,7 +332,8 @@ function buildTmplFn( markup ) {
 					"__.push('";
 			}) +
 		"');}return __;";
-	return new Function( "$","$view", code );
+
+	return new Function( "$", "$view", code );
 }
 
 function unescape( args ) {
@@ -334,7 +342,9 @@ function unescape( args ) {
 
 function outerHtml( elem ) {
 	var div = document.createElement( "div" );
-	div.appendChild( elem.cloneNode( true ));
+
+	div.appendChild( elem.cloneNode(true) );
+
 	return div.innerHTML;
 }
 
